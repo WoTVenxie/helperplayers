@@ -1,0 +1,24 @@
+name: Create Players Zip
+on:
+  push:
+    branches:
+      - main  # or 'master' depending on your repo
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Zip
+        run: sudo apt-get install zip
+
+      - name: Create Zip Archive
+        run: zip -r jsonplayers.zip players/
+
+      - name: Upload to GitHub Pages (Optional)
+        uses: actions/upload-artifact@v3
+        with:
+          name: players-zip
+          path: jsonplayers.zip
